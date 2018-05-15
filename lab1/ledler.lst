@@ -1,0 +1,227 @@
+CCS PCM C Compiler, Version 5.007, 61971               15-May-18 13:42
+
+               Filename:   C:\Users\Hp\Desktop\DERSLER\Mikrocontroller\lab1\ledler.lst
+
+               ROM used:   159 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           8 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   019
+0003:  NOP
+.................... #include <16F877.h>     // Kullanýlacak denetleyicinin baþlýk dosyasý tanýtýlýyor. 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+....................  
+.................... #list 
+....................  
+....................   
+.................... #fuses XT //,NOWDT,NOPROTECT,NOBROWNOUT,NOLVP,NOPUT,NOWRT,NODEBUG,NOCPD // Denetleyici konfigürasyon ayarlarý 
+....................   
+.................... #use delay(clock=4000000)   // Gecikme fonksiyonu için kullanýlan osilatör frekansý belirtiliyor 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+....................   
+.................... #use fast_io(b) // Port yönlendirme komutlarý B portu için geçerli 
+....................   
+.................... /********* ANA PROGRAM FONKSÝYONU********/ 
+....................   
+.................... void main () 
+0019:  MOVLW  FF
+001A:  MOVWF  20
+001B:  BSF    03.5
+001C:  BSF    1F.0
+001D:  BSF    1F.1
+001E:  BSF    1F.2
+001F:  BCF    1F.3
+0020:  BCF    03.7
+0021:  MOVLW  1F
+0022:  ANDWF  03,F
+.................... { 
+....................    setup_psp(PSP_DISABLED);        // PSP birimi devre dýþý 
+0023:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED);     // SPI birimi devre dýþý 
+0024:  BCF    03.5
+0025:  BCF    14.5
+0026:  BCF    20.5
+0027:  MOVF   20,W
+0028:  BSF    03.5
+0029:  MOVWF  07
+002A:  BCF    03.5
+002B:  BSF    20.4
+002C:  MOVF   20,W
+002D:  BSF    03.5
+002E:  MOVWF  07
+002F:  BCF    03.5
+0030:  BCF    20.3
+0031:  MOVF   20,W
+0032:  BSF    03.5
+0033:  MOVWF  07
+0034:  MOVLW  01
+0035:  BCF    03.5
+0036:  MOVWF  14
+0037:  MOVLW  00
+0038:  BSF    03.5
+0039:  MOVWF  14
+....................    setup_timer_1(T1_DISABLED);     // T1 zamanlayýcýsý devre dýþý 
+003A:  BCF    03.5
+003B:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); // T2 zamanlayýcýsý devre dýþý 
+003C:  MOVWF  78
+003D:  MOVWF  12
+003E:  MOVLW  00
+003F:  BSF    03.5
+0040:  MOVWF  12
+....................    setup_adc_ports(NO_ANALOGS);    // ANALOG giriþ yok 
+0041:  BSF    1F.0
+0042:  BSF    1F.1
+0043:  BSF    1F.2
+0044:  BCF    1F.3
+....................    setup_adc(ADC_OFF);             // ADC birimi devre dýþý 
+0045:  BCF    03.5
+0046:  BCF    1F.0
+....................    setup_CCP1(CCP_OFF);            // CCP1 birimi devre dýþý 
+0047:  MOVLW  F0
+0048:  ANDWF  17,F
+....................    setup_CCP2(CCP_OFF);            // CCP2 birimi devre dýþý 
+0049:  ANDWF  1D,F
+....................   
+....................    set_tris_b(0x00);    // RB0 portu tümüyle çýkýþ olarak ayarlandý. 
+004A:  MOVLW  00
+004B:  BSF    03.5
+004C:  MOVWF  06
+....................   
+....................    output_b(0x00);      // B portu çýkýþý sýfýrlanýyor 
+004D:  BCF    03.5
+004E:  CLRF   06
+....................   
+....................    basla: 
+....................   
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+004F:  MOVLW  02
+0050:  MOVWF  21
+0051:  MOVLW  FA
+0052:  MOVWF  22
+0053:  CALL   004
+0054:  DECFSZ 21,F
+0055:  GOTO   051
+....................    output_toggle(pin_b0);  // RB0 ucunun çýkýþ durumu tersleniyor 
+0056:  MOVLW  01
+0057:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0058:  MOVLW  02
+0059:  MOVWF  21
+005A:  MOVLW  FA
+005B:  MOVWF  22
+005C:  CALL   004
+005D:  DECFSZ 21,F
+005E:  GOTO   05A
+....................    output_toggle(pin_b1);  // RB1 ucunun çýkýþ durumu tersleniyor 
+005F:  MOVLW  02
+0060:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0061:  MOVWF  21
+0062:  MOVLW  FA
+0063:  MOVWF  22
+0064:  CALL   004
+0065:  DECFSZ 21,F
+0066:  GOTO   062
+....................    output_toggle(pin_b2);  // RB2 ucunun çýkýþ durumu tersleniyor 
+0067:  MOVLW  04
+0068:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0069:  MOVLW  02
+006A:  MOVWF  21
+006B:  MOVLW  FA
+006C:  MOVWF  22
+006D:  CALL   004
+006E:  DECFSZ 21,F
+006F:  GOTO   06B
+....................    output_toggle(pin_b3);  // RB3 ucunun çýkýþ durumu tersleniyor 
+0070:  MOVLW  08
+0071:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0072:  MOVLW  02
+0073:  MOVWF  21
+0074:  MOVLW  FA
+0075:  MOVWF  22
+0076:  CALL   004
+0077:  DECFSZ 21,F
+0078:  GOTO   074
+....................    output_toggle(pin_b4);  // RB4 ucunun çýkýþ durumu tersleniyor 
+0079:  MOVLW  10
+007A:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+007B:  MOVLW  02
+007C:  MOVWF  21
+007D:  MOVLW  FA
+007E:  MOVWF  22
+007F:  CALL   004
+0080:  DECFSZ 21,F
+0081:  GOTO   07D
+....................    output_toggle(pin_b5);  // RB5 ucunun çýkýþ durumu tersleniyor 
+0082:  MOVLW  20
+0083:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0084:  MOVLW  02
+0085:  MOVWF  21
+0086:  MOVLW  FA
+0087:  MOVWF  22
+0088:  CALL   004
+0089:  DECFSZ 21,F
+008A:  GOTO   086
+....................    output_toggle(pin_b6);  // RB6 ucunun çýkýþ durumu tersleniyor 
+008B:  MOVLW  40
+008C:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+008D:  MOVLW  02
+008E:  MOVWF  21
+008F:  MOVLW  FA
+0090:  MOVWF  22
+0091:  CALL   004
+0092:  DECFSZ 21,F
+0093:  GOTO   08F
+....................    output_toggle(pin_b7);  // RB7 ucunun çýkýþ durumu tersleniyor 
+0094:  MOVLW  80
+0095:  XORWF  06,F
+....................    delay_ms(500);          // 500 ms'lik gecikme veriliyor 
+0096:  MOVLW  02
+0097:  MOVWF  21
+0098:  MOVLW  FA
+0099:  MOVWF  22
+009A:  CALL   004
+009B:  DECFSZ 21,F
+009C:  GOTO   098
+....................   
+....................    goto basla; 
+009D:  GOTO   04F
+....................  
+.................... } 
+009E:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

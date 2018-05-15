@@ -1,0 +1,68 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+021     main.i
+022     main.sayici
+023     main.onlarBasamagi
+024     main.birlerBasamagi
+025     @delay_ms1.P1
+025     main.@SCRATCH1
+026     main.@SCRATCH2
+027     @DIV88.P1
+028     @DIV88.P1
+029     @DIV88.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  sSegment.call
+000008  sSegment.data
+000012  @DIV88
+000027  @delay_ms1
+00003C  @cinit1
+00003C  main
+00004B  @cinit2
+
+Project Directory:
+    C:\Users\Hp\Desktop\micro\lab2.2\
+
+Project Files:
+    sevenSegment2.c                                         [14-May-18 15:06  CRC=FB60F533]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F887.h [21-Haz-13 16:04  CRC=9FD133B5]
+
+Source signature=3B035C9D
+
+Units:
+    sevenSegment2 (main)
+
+Compiler Settings:
+    Processor:      PIC16F887
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   sevenSegment2.xsym
+    Errors:      sevenSegment2.err
+    Ext Symbols: sevenSegment2.esym
+    INHX8:       sevenSegment2.hex
+    Symbols:     sevenSegment2.sym
+    List:        sevenSegment2.lst
+    Debug/COFF:  sevenSegment2.cof
+    Project:     sevenSegment2.ccspjt
+    Call Tree:   sevenSegment2.tre
+    Statistics:  sevenSegment2.STA

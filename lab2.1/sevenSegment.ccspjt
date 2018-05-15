@@ -1,0 +1,21 @@
+[PROJECT]
+Target=sevenSegment.hex
+Processor_Text=PIC16F887
+CCSVersion=5.007
+Compiler=PCM
+[Target Data]
+FileList=sevenSegment.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[sevenSegment.c]
+Type=4
+[mru-list]
+1=sevenSegment.c
+[Opened Files]
+1=sevenSegment.c
+2=..\lab2.2\sevenSegment2.c
+3=..\..\..\Google Drive\micro\lab3\lab2.c
+4=
+[Units]
+Count=1
+1=sevenSegment (main)

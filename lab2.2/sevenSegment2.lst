@@ -1,0 +1,208 @@
+CCS PCM C Compiler, Version 5.007, 61971               14-May-18 15:06
+
+               Filename:   C:\Users\Hp\Desktop\micro\lab2.2\sevenSegment2.lst
+
+               ROM used:   138 words (2%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           14 (4%) worst case
+               Stack used: 0 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   03C
+0003:  NOP
+.................... //#include <stdio.h> 
+.................... //#include <stdlib.h> 
+.................... #include "16F887.h" 
+.................... //////// Standard Header file for the PIC16F887 device //////////////// 
+.................... #device PIC16F887 
+0004:  BCF    0A.0
+0005:  BCF    0A.1
+0006:  BCF    0A.2
+0007:  ADDWF  02,F
+0008:  RETLW  3F
+0009:  RETLW  06
+000A:  RETLW  5B
+000B:  RETLW  4F
+000C:  RETLW  66
+000D:  RETLW  6D
+000E:  RETLW  7D
+000F:  RETLW  07
+0010:  RETLW  7F
+0011:  RETLW  6F
+0012:  MOVF   28,W
+0013:  CLRF   78
+0014:  SUBWF  27,W
+0015:  BTFSC  03.0
+0016:  GOTO   01A
+0017:  MOVF   27,W
+0018:  MOVWF  77
+0019:  GOTO   026
+001A:  CLRF   77
+001B:  MOVLW  08
+001C:  MOVWF  29
+001D:  RLF    27,F
+001E:  RLF    77,F
+001F:  MOVF   28,W
+0020:  SUBWF  77,W
+0021:  BTFSC  03.0
+0022:  MOVWF  77
+0023:  RLF    78,F
+0024:  DECFSZ 29,F
+0025:  GOTO   01D
+0026:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #fuses XT 
+.................... #use delay(clock=4M) 
+0027:  MOVLW  25
+0028:  MOVWF  04
+0029:  BCF    03.7
+002A:  MOVF   00,W
+002B:  BTFSC  03.2
+002C:  GOTO   03B
+002D:  MOVLW  01
+002E:  MOVWF  78
+002F:  CLRF   77
+0030:  DECFSZ 77,F
+0031:  GOTO   030
+0032:  DECFSZ 78,F
+0033:  GOTO   02F
+0034:  MOVLW  4A
+0035:  MOVWF  77
+0036:  DECFSZ 77,F
+0037:  GOTO   036
+0038:  GOTO   039
+0039:  DECFSZ 00,F
+003A:  GOTO   02D
+003B:  RETURN
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................  
+....................  
+.................... //deka v6 için segment binleri ra0 ra1 
+.................... #define segmentBirler   pin_a1 
+.................... #define segmentOnlar    pin_a0 
+....................  
+.................... const char sSegment[10]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x6F }; 
+....................  
+.................... void main() 
+003C:  BSF    03.5
+003D:  BSF    03.6
+003E:  MOVF   09,W
+003F:  ANDLW  C0
+0040:  MOVWF  09
+0041:  BCF    03.6
+0042:  BCF    1F.4
+0043:  BCF    1F.5
+0044:  MOVLW  00
+0045:  BSF    03.6
+0046:  MOVWF  08
+0047:  BCF    03.5
+0048:  CLRF   07
+0049:  CLRF   08
+004A:  CLRF   09
+004B:  BCF    03.7
+004C:  MOVLW  1F
+004D:  ANDWF  03,F
+.................... { 
+....................    set_tris_b(0x00); 
+004E:  MOVLW  00
+004F:  BSF    03.5
+0050:  BCF    03.6
+0051:  MOVWF  06
+....................    set_tris_a(0x00); 
+0052:  MOVWF  05
+....................    output_d(0x00); 
+0053:  CLRF   08
+0054:  BCF    03.5
+0055:  CLRF   08
+....................        
+....................    int i=0,sayici=0; 
+0056:  CLRF   21
+0057:  CLRF   22
+....................     
+....................    while(1) 
+....................    { 
+....................    
+....................      int onlarBasamagi = i/10; 
+....................      int birlerBasamagi= i%10; 
+0058:  MOVF   21,W
+0059:  MOVWF  27
+005A:  MOVLW  0A
+005B:  MOVWF  28
+005C:  CALL   012
+005D:  MOVF   78,W
+005E:  MOVWF  23
+005F:  MOVF   21,W
+0060:  MOVWF  27
+0061:  MOVLW  0A
+0062:  MOVWF  28
+0063:  CALL   012
+0064:  MOVF   77,W
+0065:  MOVWF  24
+....................                   
+....................          output_b(sSegment[birlerBasamagi]);       
+0066:  MOVF   24,W
+0067:  CALL   004
+0068:  MOVWF  25
+0069:  MOVWF  06
+....................          output_high(segmentBirler); 
+006A:  BSF    05.1
+....................          delay_ms(5); output_low(segmentBirler); 
+006B:  MOVLW  05
+006C:  MOVWF  25
+006D:  CALL   027
+006E:  BCF    05.1
+....................          output_b(sSegment[onlarBasamagi]); 
+006F:  MOVF   23,W
+0070:  CALL   004
+0071:  MOVWF  25
+0072:  MOVWF  06
+....................          output_high(segmentOnlar); 
+0073:  BSF    05.0
+....................          delay_ms(5); output_low(segmentOnlar); 
+0074:  MOVLW  05
+0075:  MOVWF  25
+0076:  CALL   027
+0077:  BCF    05.0
+....................      
+....................          if(sayici>=100)  // 4*1/4m =1uS  
+0078:  MOVF   22,W
+0079:  SUBLW  63
+007A:  BTFSC  03.0
+007B:  GOTO   087
+....................            { 
+....................              i=(i+1)%61; // ÝF Ý ==61 i=0; 
+007C:  MOVLW  01
+007D:  ADDWF  21,W
+007E:  MOVWF  26
+007F:  MOVWF  27
+0080:  MOVLW  3D
+0081:  MOVWF  28
+0082:  CALL   012
+0083:  MOVF   77,W
+0084:  MOVWF  21
+....................              sayici=0; 
+0085:  CLRF   22
+....................            } 
+0086:  GOTO   088
+....................           else 
+....................           { 
+....................              sayici++; 
+0087:  INCF   22,F
+....................           } 
+0088:  GOTO   058
+....................            
+....................    } 
+....................     
+.................... } 
+0089:  SLEEP
+
+Configuration Fuses:
+   Word  1: 2FE1   XT NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT IESO FCMEN NOLVP NODEBUG
+   Word  2: 3FFF   BORV40 NOWRT
