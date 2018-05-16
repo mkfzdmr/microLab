@@ -11,6 +11,8 @@ Program İndirme Linkleri:
 
 [PIC KIT V2](https://drive.google.com/file/d/1CTPrHyiE6KARK5Grp0ml5N7lUhfL1il0/view?usp=sharing)
 
+[DEKA V6 Kart Manuel](http://bme.ikc.edu.tr/Share/4F427AF460E83FE1F07DF46A93BD6CB0)
+
 Seven Segment Driver:
 
 ![1](https://user-images.githubusercontent.com/15153217/40051709-68aecf10-5844-11e8-99d9-315cfa6bdc38.png)
